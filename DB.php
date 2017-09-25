@@ -123,6 +123,22 @@ class DB
             array_push($value, mysqli_fetch_assoc($result));
         return $value;
     }
+    public function replySelectDESC($con, $length)
+    {
+        //$length 0 = board_id
+        //$length 1 = reply_sub
+        if (count($length) == 1) {
+            $query = "select * from reply where board_id = $length[0] ORDER by reg_date DESC";
+        }
+        if (count($length) == 2) {
+            $query = "select * from reply where board_id = $length[0] and reply_id = $length[1] ORDER by reg_date DESC";
+        }
+        $result = mysqli_query($con,$query);
+        $value = array();
+        for ($i = 0; $i < mysqli_num_rows($result); $i++)
+            array_push($value, mysqli_fetch_assoc($result));
+        return $value;
+    }
 
     public function replyDelete($con, $value)
     {

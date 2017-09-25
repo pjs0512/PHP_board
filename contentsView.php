@@ -91,7 +91,12 @@ $selectValue = $db->select($con,array("board","board_id",$_GET['board_id']));
                                     </tr>
                                 </table>
                                     <?php
-                            }else{
+                            }
+                        }
+                                    $selectReply=$db->replySelectDESC($con,array($selectValue[0]['board_id']));
+                                    for($i=0;$i<count($selectReply);$i++){
+                                    if($selectReply[$i]['reply_subid']==0){}else{
+
                                         $selectName=$db->replySelect($con,array($selectValue[0]['board_id'],$selectReply[$i]['reply_subid']));
                                         $name = $selectName[0]['user_name'];
                                 ?>
